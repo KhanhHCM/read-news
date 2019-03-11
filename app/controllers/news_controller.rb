@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-  def index
+  def test
     doc = Nokogiri::HTML(open('https://news.ycombinator.com/best')).css('a.storylink')
     @list_news = []
     doc.each do |post|
@@ -16,6 +16,18 @@ class NewsController < ApplicationController
     end
   end
 
-  def show
+  def index
+    @news = Post.select(:id, :title, :link_image, :description).order(created_at: :desc)
+                  .paginate page: params[:page], per_page: 6
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
+
+  def show
+    @post = Post.find(params[:id])
+    @relative_news = Post.where(id: Post.pluck(:id).sample(2))
+  end
+
 end

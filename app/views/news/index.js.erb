@@ -1,0 +1,7 @@
+$('#posts').append('<%= j render @list_news %>');
+<% if @list_news.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @list_news %>');
+<% else %>
+  $(window).off('scroll');
+  $('.pagination').remove();
+<% end %>

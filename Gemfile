@@ -45,8 +45,13 @@ gem 'fastimage'
 
 #bootsnap
 gem 'bootstrap', '~> 4.3.1'
+gem "will_paginate"
+gem "bootstrap-sass"
+gem "bootstrap-will_paginate"
 
 gem 'jquery-rails'
+
+gem 'whenever', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

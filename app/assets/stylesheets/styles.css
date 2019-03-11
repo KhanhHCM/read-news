@@ -118,7 +118,7 @@ header i{ font-size: 1.1em; }
 
 header:after{ content:''; clear: both; }
 
-header .logo{ float: left; height: 24px; margin: 28px 0; }
+header .logo{ float: left; height: 120px; }
 
 header .logo img{ height: 100%; width: auto; }
 

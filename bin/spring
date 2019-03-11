@@ -11,6 +11,7 @@ unless defined?(Spring)
   require 'nokogiri'
   require 'open-uri'
   require 'fastimage'
+  require 'resolv-replace'
 
   lockfile = Bundler::LockfileParser.new(Bundler.default_lockfile.read)
   spring = lockfile.specs.detect { |spec| spec.name == "spring" }
