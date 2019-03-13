@@ -1,12 +1,12 @@
 <div class="col-sm-6">
-  <%= link_to post_path(post) do %>
+  <%= link_to news_path(post) do %>
     <%= image_tag (post.link_image) %>
     <h4 class="pt-20">
         <b><%= post.title %></b>
     </h4>
   <% end %>
   <ul class="list-li-mr-20 pt-10 mb-30">
-    <li class="color-lite-black"><%= post.description %></li>
+    <li class="color-lite-black"><%= post.description.html_safe %></li>
     by <%= link_to "#", class:'color-black' do %>
       <b><%= post.author.name %></b>
     <% end %>

@@ -1,6 +1,13 @@
 class Post < ApplicationRecord
   belongs_to :author
   validates :title, uniqueness: true
+  acts_as_url :title, url_attribute: :slug, sync: true
+  extend FriendlyId
+    friendly_id :title, use: [:slugged, :finders]
+
+  def to_param
+    "#{slug}"
+  end
 
   def self.get_news
     require 'open-uri'
@@ -38,5 +45,6 @@ class Post < ApplicationRecord
   def timestamp
     created_at.strftime('%d %B %Y %H:%M')
   end
+
 
 end
