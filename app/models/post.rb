@@ -30,4 +30,8 @@ class Post < ApplicationRecord
     Readability::Document.new(source).content
   end
 
+  def timestamp
+    created_at.strftime('%d %B %Y %H:%M')
+  end
+
 end

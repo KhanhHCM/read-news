@@ -6,7 +6,7 @@
         Home
       <i class="mlr-10 ion-chevron-right"></i>
     </a>
-    <a class="mt-10 color-ash" href="#"><%= @news.title %></a>
+    <a class="mt-10 color-ash" href="#"><%= @post.title %></a>
   </div>
 </section>
 
@@ -14,16 +14,18 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-8">
-        <%= image_tag(@news.link_image) %>
-        <h3 class="mt-30"><b><%= @news.title %></b></h3>
+        <%= image_tag(@post.link_image) %>
+        <h3 class="mt-30"><b><%= @post.title %></b></h3>
         <ul class="list-li-mr-20 mtb-15"></ul>
         <div class="quote-primary mtb-20">
-          <h5><b><%= @news.description.html_safe %></b></h5>
+          <h5><b><%= @post.description.html_safe %></b></h5>
         </div>
-        <div class"mtb-15"><%= @news.news_content.html_safe %></div>
+        <div class"mtb-15"><%= @post.news_content.html_safe %></div>
 
         <h4 class="p-title mt-50"><b>YOU MAY ALSO LIKE</b></h4>
-        <%= render partial: "news", locals: {list_news: @relative_news} %>
+        <div class="row">
+          <%= render @posts %>
+        </div>
       </div>
     </div>
   </div>

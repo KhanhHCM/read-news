@@ -3,14 +3,12 @@
     <div class="row">
       <div class="col-md-12 col-lg-8">
         <h4 class="p-title mt-30"><b>LIST NEWS</b></h4>
-          <div id="posts">
-            <%= render @news %>
+          <div class="row" id="my-posts">
+            <%= render @posts %>
           </div>
-
           <div id="infinite-scrolling">
             <%= will_paginate %>
           </div>
-        <a class="dplay-block btn-brdr-primary mt-20 mb-md-50" href="#"><b>VIEW MORE NEWS</b></a>
       </div><!-- col-md-9 -->
     </div>
   </div>

@@ -46,7 +46,6 @@ gem 'fastimage'
 #bootsnap
 gem 'bootstrap', '~> 4.3.1'
 gem "will_paginate"
-gem "bootstrap-sass"
 gem "bootstrap-will_paginate"
 
 gem 'jquery-rails'
