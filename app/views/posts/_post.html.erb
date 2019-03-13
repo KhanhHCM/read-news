@@ -8,9 +8,9 @@
   <ul class="list-li-mr-20 pt-10 mb-30">
     <li class="color-lite-black"><%= post.description %></li>
     by <%= link_to "#", class:'color-black' do %>
-      <b>Author</b>
+      <b><%= post.author.name %></b>
     <% end %>
     <li class="color-black"><em><%= post.timestamp %></em></li>
-    
+
   </ul>
 </div>

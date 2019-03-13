@@ -5,6 +5,6 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @posts = Post.where(id: Post.pluck(:id).sample(2))
+    @posts = @post.author.posts.where.not(id: params[:id])
   end
 end

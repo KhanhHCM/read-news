@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_021835) do
+ActiveRecord::Schema.define(version: 2019_03_13_072208) do
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -19,6 +25,8 @@ ActiveRecord::Schema.define(version: 2019_03_11_021835) do
     t.string "link_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "author_id"
+    t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
 end
