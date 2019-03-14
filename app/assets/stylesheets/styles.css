@@ -1966,3 +1966,11 @@ section{ padding: 50px 0; }
 #infinite-scrolling{
 	display: flex;
 }
+
+@media only screen and (max-width: 576px) {
+	.pagination{
+		height: 40px;
+		width: 40px;
+		margin-bottom: 20px;
+	}
+}
