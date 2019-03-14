@@ -1961,3 +1961,7 @@ section{ padding: 50px 0; }
 	.plr-xs-90{ padding-left: 90px!important; padding-right: 90px!important; }
 
 }
+
+#infinite-scrolling{
+	display: flex;
+}
