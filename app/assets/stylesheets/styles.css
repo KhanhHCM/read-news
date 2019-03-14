@@ -200,7 +200,7 @@ header .main-menu li.drop-down a.mouseover + ul.drop-down-menu{ display: block;
 
 @media only screen and (max-width: 767px) {
 
-	header .logo{ height: 16px; margin: 22px 0; }
+	header .logo{ height: 35px; margin: 22px 0; }
 
 	header .right-area{ line-height: 50px; }
 
@@ -620,6 +620,7 @@ section{ padding: 50px 0; }
 /* RESPONSIVE */
 
 @media only screen and (max-width: 767px) {
+	section{ padding: 0px 0!important; }
 
 	.w-sm-auto{ width: auto!important; }
 	.h-sm-auto{ height: auto!important; }
