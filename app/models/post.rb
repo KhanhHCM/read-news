@@ -42,9 +42,4 @@ class Post < ApplicationRecord
     Nokogiri::HTML(open(self.url).read).css('article.content_detail').to_html
   end
 
-  def timestamp
-    created_at.strftime('%d %B %Y %H:%M')
-  end
-
-
 end

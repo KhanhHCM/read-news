@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div class="col-sm-4">
   <%= link_to news_path(post) do %>
     <%= image_tag (post.link_image) %>
     <h4 class="pt-20">
@@ -10,7 +10,7 @@
     by <%= link_to "#", class:'color-black' do %>
       <b><%= post.author.name %></b>
     <% end %>
-    <li class="color-black"><em><%= post.timestamp %></em></li>
+    <li class="color-black"><em><%= time_ago_in_words(post.created_at) %> ago</em></li>
 
   </ul>
 </div>
