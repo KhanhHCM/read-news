@@ -2,4 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'posts#index'
   get 'news/:id', to: 'posts#show', as: 'news'
+  get '/test' , to: 'posts#tests'
+  get '/god_post', to: 'posts#god_post' , as: 'god_post'
 end
