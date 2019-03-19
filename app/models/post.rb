@@ -1,6 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :author
   validates :title, uniqueness: true
+
+  scope :vnexpress, ->{where source: 1}
+  scope :random_order, -> {order('DBMS_RANDOM.VALUE')}
+
   acts_as_url :title, url_attribute: :slug, sync: true
   extend FriendlyId
     friendly_id :title, use: [:slugged, :finders]

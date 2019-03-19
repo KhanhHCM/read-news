@@ -22,7 +22,11 @@
         <div class="quote-primary mtb-20">
           <h5><b><%= @post.description.html_safe %></b></h5>
         </div>
-        <div class"mtb-15"><%= @post.news_content.html_safe %></div>
+        <div class="mtb-15"><%= @post.news_content.html_safe %></div>
+
+        <div class="mb-30 opacty-5">
+          <em>※Nếu không xem được nội dung mời nhấn vào </em><i><b><%= link_to "đây" , @post.url %></b><i>
+        </div>
 
         <h4 class="p-title mt-50"><b>YOU MAY ALSO LIKE OTHER NEWS </b>by <b class="text-danger" ><%= @post.author.name %></b></h4>
         <div class="row">
