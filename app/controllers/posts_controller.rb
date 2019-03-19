@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def god_post
-    time   = Time.now.strftime("%Y-%m-%d")
+    time   = Time.zone.now.strftime("%Y-%m-%d")
     params = "http://thanhlinh.net/lich-loi-chua/#{time}"
     doc    = Nokogiri::HTML(open(params).read).css('div[class="view-field view-data-node-title node-title"]//a')
     link   = "http://thanhlinh.net/#{doc.first['href']}"
