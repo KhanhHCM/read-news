@@ -2,14 +2,20 @@
 <html lang="en">
   <head>
 
-  	<title>Read News</title>
+  	<title>ReadNews - <%= yield(:title) %></title>
     <%= favicon_link_tag asset_path('logo.png') %>
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta charset="UTF-8">
     <meta name="description" content="<%= yield(:description) %>" />
-    <meta property="og:image" content="<%= yield(:image) %>" />
-    <meta property="og:description" content="<%= yield(:description) %>" />
+    <meta name="keywords" content="ReadNews, Tin tuc tong hop, ,Vietnam News Daily,Economy,Online,Internet,Magazine,Gateway,FPT,Portal,Tin nhanh,cập nhật,báo điện tử,việt báo,tin việt,VietNews,mua bán,rao vặt,tư vấn,việc làm,Hà Nội,Sài Gòn,tin tức,Huế,Đà Nẵng,VDC,Netnam,Saigonnet,Sggp,VET,Nhân dân,Lao động,Kinh tế,Kinh doanh,Tin nhanh,cap nhat,bao dien tu,Vietbao,TinViet,Mua Ban,Rao Vat,Tu Van,Viec Lam,Hanoi,Ha Noi,Saigon,Sai gon,Tin tuc,Tintuc,Hue,Da Nang,Danang,Nhandan,Nhan dan,Laodong,Lao dong,Kinhte,Kinh te,Kinhdoanh,Kinh doanh, <%= yield(:keywords)%> " />
+    <!-- META FOR FACEBOOK -->
+    <meta property="og:site_name" content="Tin tức Tổng hợp" />
+    <meta property="og:url" itemprop="url" content="https://read-news.herokuapp.com/" />
+    <meta property="og:image" itemprop="thumbnailUrl" content="<%= image_path('loichua.png') %>" />
+    <meta property="og:title" content="ReadNews - <%= yield(:title) %>" itemprop="headline" />
+    <meta property="og:description" itemprop="description" content="<%= yield(:description) %>" />
+    <!-- END META FOR FACEBOOK -->
 
   	<!-- Font -->
   	<link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
