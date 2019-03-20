@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :author
-  validates :url, uniqueness: { scope: :slug }
+  validates :url, :slug, uniqueness: true
 
   scope :vnexpress, ->{where source: 1}
   scope :random_order, -> {order('DBMS_RANDOM.VALUE')}
