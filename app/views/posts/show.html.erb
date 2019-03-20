@@ -1,7 +1,7 @@
-<%= provide(:description, @post.description) %>
-<%= provide(:image, @post.link_image) %>
-<%= provide(:title, @post.title ) %>
-<%= provide(:keywords, @post.slug) %>
+<% content_for :meta_title, "#{DEFAULT_META["meta_product_name"]} - #{@post.title}" %>
+<% content_for :meta_description, @post.description %>
+<% content_for :meta_image, @post.link_image %>
+<% content_for :keywords, @post.title %>
 
 <section class="ptb-0">
   <div class="mb-30 brdr-ash-1 opacty-5"></div>

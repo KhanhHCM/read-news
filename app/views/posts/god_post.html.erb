@@ -1,7 +1,7 @@
-<%= provide(:title, title = "Lời chúa ngày : #{Time.zone.now.strftime("%d/%m/%Y")}" ) %>
-<%= provide(:keywords, "loi chua moi ngay, loi chua ngay hom nay, loi chua ngay #{Time.zone.now.strftime("%d/%m/%Y")} ") %>
-<%= provide(:description, "Lời Chúa ngày #{Time.zone.now.strftime("%d/%m/%Y")} . Cùng lắng nghe lời Chúa mỗi ngày") %>
-<%= provide(:image, "https://read-news.herokuapp.com" + image_path("loichua.png")) %>
+<% content_for :meta_title, title = "Lời chúa ngày : #{Time.zone.now.strftime("%d/%m/%Y")}" %>
+<% content_for :meta_description, "Cùng lắng nghe lời Chúa mỗi ngày.Lời Chúa ngày " %>
+<% content_for :meta_image, request.original_url + image_path("loichua.png") %>
+<% content_for :keywords, title %>
 
 <section class="ptb-0">
   <div class="mb-30 brdr-ash-1 opacty-5"></div>
