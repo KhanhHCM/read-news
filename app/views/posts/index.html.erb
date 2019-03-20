@@ -1,5 +1,7 @@
 <%= provide(:description, @posts.first.description) %>
 <%= provide(:image, @posts.first.link_image) %>
+<%= provide(:title, "Tin tức ngày : #{Time.zone.now.strftime("%d/%m/%Y")}" ) %>
+<%= provide(:keywords, "tin tuc ngay #{Time.zone.now.strftime("%d/%m/%Y")} ") %>
 
 <section>
   <div class="container">
