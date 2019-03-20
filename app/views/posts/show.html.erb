@@ -18,6 +18,9 @@
       <div class="col-md-12 col-lg-8">
         <%= image_tag(@post.link_image) %>
         <h3 class="mt-30"><b><%= @post.title %></b></h3>
+        <div class="mb-30 opacty-5">
+          <i><%= @post.updated_at.strftime("%d/%m/%Y - %H:%M") %></i>
+        </div>
         <ul class="list-li-mr-20 mtb-15"></ul>
         <div class="quote-primary mtb-20">
           <h5><b><%= @post.description.html_safe %></b></h5>

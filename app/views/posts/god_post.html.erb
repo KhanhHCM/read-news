@@ -6,7 +6,7 @@
         Home
       <i class="mlr-10 ion-chevron-right"></i>
     </a>
-    <a class="mt-10 color-ash" href="#">Lời chúa ngày : <%= Time.now.strftime("%d/%m/%Y") %></a>
+    <a class="mt-10 color-ash" href="#">Lời chúa ngày : <%= Time.zone.now.strftime("%d/%m/%Y") %></a>
   </div>
 </section>
 
@@ -15,6 +15,9 @@
     <div class="row">
       <div class="col-md-12 col-lg-8">
         <%= @god_post.html_safe %>
+        <div class="mb-30 brdr-ash-1 opacty-5">
+          <em>※Quay lại trang Tin tức nhấn vào </em><i><b><%= link_to "đây" , root_path %></b></i>
+        </div>
       </div>
     </div>
   </div>
