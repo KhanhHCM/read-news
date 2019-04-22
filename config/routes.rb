@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  api_version(:module => "V1", :path => {:value => "v1"}, :default => true) do
-    resources :posts
+  api_version(:module => "V1", :path => {:value => "v1"}, :default => false) do
+    resources :posts, only: [:index, :show]
     end  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'posts#index'
   get 'news/:id', to: 'posts#show', as: 'news'
