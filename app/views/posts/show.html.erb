@@ -28,7 +28,9 @@
         <div class="quote-primary mtb-20">
           <h5><b><%= @post.description.html_safe %></b></h5>
         </div>
-        <div class="mtb-15"><%= @post.news_content.html_safe %></div>
+        <% if @post.html? %>
+          <div class="mtb-15"><%= @post.news_content.html_safe %></div>
+        <% end %>
 
         <div class="mb-30 opacty-5">
           <em>※Nếu không xem được nội dung mời nhấn vào </em><i><b><%= link_to "đây" , @post.url %></b></i>

@@ -42,8 +42,16 @@ class Post < ApplicationRecord
 
   end
 
+  def self.update_news
+    require 'open-uri'
+    Post.all.each do |post|
+      html = Nokogiri::HTML(open(post.url)).css('article.content_detail')
+      post.update(html: html)
+    end
+  end
+
   def news_content
-    Nokogiri::HTML(open(self.url).read).css('article.content_detail').to_html
+    self.html.to_html
   end
 
 end
