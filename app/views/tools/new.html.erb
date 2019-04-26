@@ -1,0 +1,98 @@
+<section style="min-height: 600px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <h4 class="p-title mt-30"><b>Tính tiền điện  đây</b></h4>
+          <p> Nhập số điện các hạ đã dùng tháng vừa rồi vào ô dưới</p>
+          <input type="text" id="quantity">
+          <hr>
+          <div>
+            <p>Tiền điện <span id="fee" style="color: red; font-size: large;">0</span> $ </p>
+            <p>Thêm cả VAT nữa số tiền các hạ mất là <span id="vat" style="color: red; font-size: large;">0</span> $ </p>
+            <p id="comment" style="color: red;"></p>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+
+
+    $('#quantity').change(function(){
+      $('#comment').hide();
+      $('#fee').hide();
+      $('#vat').hide();
+      var value = $('#quantity').val();
+      var sodien = Number(value);
+
+      if (isNaN(sodien)){
+        $('#comment').text("DKM ! Đã bảo hút cần ít thôi , nhập số thôi, nhập ký tự khác vào tính đc cc ấy !").fadeIn("slow");
+        $('#fee').text("méo thể tính nổi").fadeIn("slow");
+        $('#fee').text("éo biết").fadeIn("slow");
+      }else {
+        var object = calculate(sodien);
+        var vat  = (object.money)*1.1
+        $('#fee').text(object.money.toLocaleString()).fadeIn("slow");
+        $('#vat').text(vat.toLocaleString()).fadeIn("slow");
+        $('#comment').text(object.comment).fadeIn("slow");
+
+      }
+    })
+
+    function calculate(sodien) {
+      var price1 = 1678;
+      var price2 = 1734;
+      var price3 = 2014;
+      var price4 = 2536;
+      var price5 = 2834;
+      var price6 = 2927;
+
+      var lv1 = price1*50;
+      var lv2 = lv1 + price2*50;
+      var lv3 = lv2 + price3*100;
+      var lv4 = lv3 + price4*100;
+      var lv5 = lv4 + price5*100;
+
+      if (sodien < 51) {
+        var obj = {
+          money: sodien*price1,
+          comment: "Tiết kiệm thế ! Nhà ko có máy lạnh à?"
+        }
+        return obj;
+      } else if(sodien < 101) {
+        var obj = {
+          money: lv1+(sodien - 50)*price2,
+          comment: "Tiết kiệm thế là tốt, nhớ đi làm từ thiện thường xuyên nhé !"
+        }
+        return obj;
+      } else if(sodien < 201){
+        var obj = {
+          money: lv2+(sodien - 100)*price3,
+          comment: "Tiết kiệm thế là tốt, giữ phong độ nhé !"
+        }
+        return obj;
+      } else if(sodien < 301){
+        var obj = {
+          money: lv3+(sodien - 200)*price4,
+          comment: "Dùng điện hơi nhiều đấy, tắt bớt tivi , máy lạnh ,nhấc mông lên ra ngoài hít không khí trong lành nào"
+        }
+        return obj;
+      } else if(sodien < 401){
+        var obj = {
+          money: lv4+(sodien - 300)*price5,
+          comment: "Nhà kinh doanh à? Ko thì đi kiểm tra lại khéo hư cmn đồng hồ điện rồi"
+        }
+        return obj;
+      } else {
+        var obj = {
+          money: lv5+(sodien - 400)*price6,
+          comment: "Vãi , bảo nhập số điện 1 tháng đi nhập số điện cả năm à T.T !"
+        }
+        return obj;
+      }
+    }
+
+  })
+</script>

@@ -1974,3 +1974,8 @@ section{ padding: 50px 0; }
 		margin-bottom: 20px;
 	}
 }
+
+#quantity{
+	margin-top: 12px;
+	border-style: groove;
+}
