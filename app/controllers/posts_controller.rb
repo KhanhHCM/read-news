@@ -1,18 +1,18 @@
 class PostsController < ApplicationController
 
   def index
-    # url_source = "https://vnexpress.net"
-    # doc = Nokogiri::HTML(open(url_source).read).css('[id="list_sub_featured"]//li//a:nth-child(1)')
-    # list_news = []
-    # doc.each do |post|
-    #   link    = post['href']
-    #   break if Post.exists?(url: link)
-    #   list_news << link
-    # end
-    #
-    # if list_news.length > 0
-    #   LoadNewsWorker.perform_async(list_news)
-    # end
+    url_source = "https://vnexpress.net"
+    doc = Nokogiri::HTML(open(url_source).read).css('[id="list_sub_featured"]//li//a:nth-child(1)')
+    list_news = []
+    doc.each do |post|
+      link    = post['href']
+      break if Post.exists?(url: link)
+      list_news << link
+    end
+
+    if list_news.length > 0
+      LoadNewsWorker.perform_async(list_news)
+    end
 
     @posts = Post.vnexpress.includes(:author).order('created_at DESC').paginate(page: params[:page], per_page: 6)
   end
