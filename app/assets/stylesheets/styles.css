@@ -1979,3 +1979,7 @@ section{ padding: 50px 0; }
 	margin-top: 12px;
 	border-style: groove;
 }
+
+#comment {
+	font-size: 110%;
+}

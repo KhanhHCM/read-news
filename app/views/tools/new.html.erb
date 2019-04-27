@@ -7,33 +7,65 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-lg-8">
-        <h4 class="p-title mt-30"><b>Tính tiền điện  đây</b></h4>
-          <p> Nhập số điện các hạ đã dùng tháng vừa rồi vào ô dưới</p>
-          <input type="text" id="quantity">
-          <hr>
-          <div>
-            <p>Tiền điện <span id="fee" style="color: red; font-size: large;">0</span> $ </p>
-            <p>Thêm cả VAT nữa số tiền các hạ mất là <span id="vat" style="color: red; font-size: large;">0</span> $ </p>
-            <p id="comment" style="color: red;"></p>
-          </div>
+        <h4 class="row p-title mt-30"><b>Tính tiền điện  đây</b></h4>
       </div>
     </div>
-    <hr>
-    <div class="row">
-      <h4>Giá điện trên được tính theo thông báo của EVN:</h4>
-      <pre>
-      Bậc1: 0 – 50kWh     1.678 đ/kWh (giá cũ 1.549 đ/kWh)
 
-      Bậc2: 51 – 100kWh   1.734 đ/kWh (giá cũ 1.600 đ/kWh)
+    <div class="form-row" >
+      <div class="col-md-8 mb-6">
+        <input type="text" class="form-control" id="quantity" placeholder="Nhập số điện dùng trong tháng">
+        <div class="" id="comment"></div>
+      </div>
+    </div>
 
-      Bậc3: 101 – 200kWh  2.014 đ/kWh (giá cũ 1.858 đ/kWh)
+    <table class="col-lg-6 table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Giá cũ</th>
+          <th scope="col">Giá mới</th>
+          <th scope="col">Tăng %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Số tiền</th>
+          <td class="text-primary" id="old_fee"></td>
+          <td id="new_fee"></td>
+          <td class="text-danger" id="fee_percent"></td>
+        </tr>
+        <tr>
+          <th scope="row"> + VAT</th>
+          <td class="text-primary" id="old_vat"></td>
+          <td id="new_vat"></td>
+          <td class="text-danger" id="vat_percent"></td>
+        </tr>
+      </tbody>
+    </table>
 
-      Bậc4: 201 – 300kWh  2.536 đ/kWh (giá cũ 2.340 đ/kWh)
 
-      Bậc5: 301 – 400kWh  2.834 đ/kWh (giá cũ 2.615 đ/kWh)
+    <h4 class="row">Được tính theo Báo giá của EVN</h4>
 
-      Bậc6: 401kWh~       2.927 đ/kWh (giá cũ 2.701 đ/kWh)
-    </pre>
+    <table class="col-lg-6 table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Mức (kWh)</th>
+          <th scope="col">Giá cũ</th>
+          <th scope="col">Giá mới</th>
+          <th scope="col">Tăng %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data.each do |data| %>
+          <tr>
+            <th scope="row"><%= data[:lv] %></th>
+            <td class="text-primary" id="old-<%= data[:rank] %>"><%= data[:old_price] %></td>
+            <td id="new-<%= data[:rank] %>"><%= data[:new_price]%></td>
+            <td class="text-danger"><%= "%.2f" % data[:per_up] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
     </div>
   </div>
@@ -42,32 +74,46 @@
 <script>
   document.addEventListener("DOMContentLoaded", function(event) {
 
-
     $('#quantity').change(function(){
-      $('#comment').hide();
-      $('#fee').hide();
-      $('#vat').hide();
+      $('#old_fee, #old_vat, #fee_percent, #new_fee, #new_vat, #vat_percent, #comment').hide();
+      $('#quantity').removeClass("is-invalid is-valid");
+      $('#comment').removeClass("valid-feedback invalid-feedback");
       var value = $('#quantity').val();
       var sodien = Number(value);
 
       if (isNaN(sodien)){
-        $('#comment').text("DKM ! Đã bảo hút cần ít thôi , nhập số thôi, nhập ký tự khác vào tính đc cc ấy !").fadeIn("slow");
-        $('#fee').text("méo thể tính nổi").fadeIn("slow");
-        $('#vat').text("éo biết luôn").fadeIn("slow");
+        $('#quantity').addClass("is-invalid");
+        $('#comment').addClass("invalid-feedback").text("Đã bảo hút cần ít thôi , nhập số thôi, nhập ký tự khác vào tính đc cc ấy !").fadeIn("slow");
       }else {
         var object = calculate(sodien);
-        var total = object.money.toLocaleString() + " | Giá cũ: " + object.old.toLocaleString()
-        var vat  = ((object.money)*1.1).toLocaleString() + " | Giá cũ: " + ((object.old)*1.1).toLocaleString()
-        $('#fee').text(total).fadeIn("slow");
-        $('#vat').text(vat).fadeIn("slow");
-        $('#comment').text(object.comment).fadeIn("slow");
+        var fee = {
+          oldFee: object.old,
+          newFee: object.money,
+          per: (object.money - object.old)/object.old*100
+        }
+
+        var vat = {
+          oldVat: object.old*1.1,
+          newVat: object.money*1.1,
+          per: (object.money*1.1 - object.old*1.1)/object.old*100
+        }
+
+        $('#old_fee').text(fee.oldFee.toLocaleString()).fadeIn("slow");
+        $('#old_vat').text(vat.oldVat.toLocaleString()).fadeIn("slow");
+        $('#fee_percent').text(fee.per.toLocaleString()).fadeIn("slow");
+        $('#new_fee').text(fee.newFee.toLocaleString()).fadeIn("slow");
+        $('#new_vat').text(vat.newVat.toLocaleString()).fadeIn("slow");
+        $('#vat_percent').text(vat.per.toLocaleString()).fadeIn("slow");
+
+        $('#comment').addClass("valid-feedback").text(object.comment).fadeIn("slow");
+        $('#quantity').addClass("is-valid");
 
       }
     })
 
     function calculate(sodien) {
-      var new_price = [1678, 1734, 2014, 2536, 2834, 2927]
-      var old_price = [1549, 1600, 1858, 2340, 2615, 2710]
+      var new_price = [1678, 1734, 2014, 2536, 2834, 2927];
+      var old_price = [1549, 1600, 1858, 2340, 2615, 2710];
 
       var new1 = new_price[0]*50;
       var new2 = new1 + new_price[1]*50;
