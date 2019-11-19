@@ -61,6 +61,8 @@ gem "stringex"
 #Delay job
 gem 'sidekiq'
 
+gem 'activeadmin'
+
 #API
 gem 'versionist'
 

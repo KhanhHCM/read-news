@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   api_version(:module => "V1", :path => {:value => "v1"}, :default => false) do
     resources :posts, only: [:index, :show]
     end  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
