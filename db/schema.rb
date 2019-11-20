@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_094848) do
+ActiveRecord::Schema.define(version: 2019_11_20_062550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,12 +42,20 @@ ActiveRecord::Schema.define(version: 2019_11_18_094848) do
     t.integer "fruit_type"
     t.integer "age"
     t.string "birthplace"
-    t.string "height"
+    t.integer "height"
     t.string "favourite"
-    t.date "birthday"
+    t.string "birthday"
     t.text "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "group"
+    t.string "spec_name"
+    t.string "orther"
+    t.string "romaji_name"
+    t.decimal "ranking"
+    t.text "memo"
+    t.string "haki"
+    t.string "weapon"
   end
 
   create_table "posts", force: :cascade do |t|

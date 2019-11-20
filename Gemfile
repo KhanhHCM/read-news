@@ -40,7 +40,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'nokogiri', '~> 1.6', '>= 1.6.8'
 
 #readability
-gem "ruby-readability", :require => 'readability'
+gem 'ruby-readability', :require => 'readability'
 gem 'fastimage'
 
 #link_thumbnailer
@@ -48,15 +48,15 @@ gem 'link_thumbnailer'
 
 #bootsnap
 gem 'bootstrap', '~> 4.3.1'
-gem "will_paginate"
-gem "bootstrap-will_paginate"
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
 gem 'jquery-rails'
 
 gem 'whenever', require: false
 
-gem "friendly_id", "~> 5.1.0"
-gem "stringex"
+gem 'friendly_id', "~> 5.1.0"
+gem 'stringex'
 
 #Delay job
 gem 'sidekiq'
@@ -78,7 +78,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "bullet"
+  gem 'bullet'
 end
 
 group :test do

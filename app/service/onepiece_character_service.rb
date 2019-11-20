@@ -24,6 +24,22 @@ class OnepieceCharacterService
     end
   end
 
+  def get_char_info(url)
+    doc = full_url(url)
+    puts "Getting char's info from is #{doc}"
+    # info = doc_content(doc).css('p[class="t middle"]', 'h1[class="t large"]', 'li[class="fl"]')
+    info = doc_content(doc).css('li[class="fl"]')
+    data = {}
+    info.each do |info|
+      next if info.blank?
+      target = info.text.gsub(/\s+/, "")
+      iam = who_am_i(target)
+      data.merge!(iam)
+    end
+
+    return data
+  end
+
 
 private
 
@@ -71,6 +87,26 @@ private
   def apply_fruit(data)
     character = Character.find_or_create_by(url: data[0])
     character.update(devilfruit: data[1])
+  end
+
+  def who_am_i(data)
+    if data.include?('通称')
+     return {spec_name: data.tr('通称', '')}
+    elsif data.include?('懸賞金')
+     return {reward: data.tr('懸賞金', '')}
+    elsif data.include?('年齢')
+     return {age: data.tr('年齢', '')}
+    elsif data.include?('出身地')
+     return {birthplace: data.tr('出身地', '')}
+    elsif data.include?('身長')
+     return {height: data.tr('身長', '')}
+    elsif data.include?('好物')
+     return {favourite: data.tr('好物', '')}
+    elsif data.include?('誕生日')
+     return {birthday: data.tr('誕生日', '')}
+    else
+     {orther: data}
+    end
   end
 
 end
