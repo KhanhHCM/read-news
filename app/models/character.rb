@@ -1,5 +1,19 @@
 class Character < ApplicationRecord
 
+  def get_pixiv
+    data = CrawlPixivService.new.op_character(self.pixiv_link)
+    if data.present?
+      self.update(data)
+    else
+      self.destroy
+    end
+  end
+
+  # def get_pixiv
+  #   data = CrawlPixivService.new.remove_if_notfound(self.pixiv_link)
+  #   self.destroy unless data.present?
+  # end
+
   def get_more_info
     data = OnepieceCharacterService.new.get_char_info(self.url)
     index = self.url.index('.') - 1

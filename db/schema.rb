@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_20_062550) do
+ActiveRecord::Schema.define(version: 2019_11_21_032743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,9 @@ ActiveRecord::Schema.define(version: 2019_11_20_062550) do
     t.text "memo"
     t.string "haki"
     t.string "weapon"
+    t.string "pixiv_link"
+    t.string "height_s"
+    t.string "age_s"
   end
 
   create_table "posts", force: :cascade do |t|

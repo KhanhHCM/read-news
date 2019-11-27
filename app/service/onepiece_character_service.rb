@@ -3,6 +3,17 @@ class OnepieceCharacterService
     @source = 'https://one-piece.com/'
   end
 
+  def get_chap
+    url = 'log/story.html'
+    link = full_url(url)
+    doc = doc_content(link).css('ul[class="itemList latest active"]/li/a')
+    doc.each do |d|
+      data = d['href']
+      index = data.index('.') - 1
+      p data[18..index].tr('_', ' ')
+    end
+  end
+
   def get_character(get_single)
     url = 'log/character.html'
     if get_single
@@ -66,7 +77,7 @@ private
 
   def full_url(url)
     full_url = @source + url
-    return full_url
+    full_url
   end
 
   def limit_page(url)

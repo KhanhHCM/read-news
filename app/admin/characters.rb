@@ -42,11 +42,14 @@ ActiveAdmin.register Character do
       row :devilfruit
       row :age
       row :height
+      row :age_s
+      row :height_s
       row :birthplace
       row :birthday
       row :favourite
       row :haki
       row :weapon
+      row :pixiv_link
       row :url
       row :memo
       row :created_at
@@ -65,11 +68,14 @@ ActiveAdmin.register Character do
       input :devilfruit
       input :age
       input :height
+      input :age_s
+      input :height_s
       input :birthplace
       input :birthday
       input :favourite
       input :haki
       input :weapon
+      input :pixiv_link
       input :url
       input :memo
     end
