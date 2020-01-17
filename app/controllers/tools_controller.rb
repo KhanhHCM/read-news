@@ -23,6 +23,21 @@ class ToolsController < ApplicationController
     end
   end
 
+  def tax
+    lv = [*1..7]
+    explan = ["Dưới 5", "Từ 5 ~ 10", "Từ 10 ~ 18", "Từ 18 ~ 32", "Từ 32 ~ 52", "Từ 52 ~ 80", "Trên 80"]
+    per = [*5..35].select { |a| a%5 == 0}
+    @data = []
+    (0..7).each do |n|
+      @data << {
+        lv: lv[n],
+        explan: explan[n],
+        per:        per[n],
+      }
+    end
+
+  end
+
   private
   def percent_up(new_price, old_price)
     ((new_price - old_price).fdiv old_price)*100

@@ -1,0 +1,157 @@
+<% content_for :meta_title, title = "HP - NEWS ! Thuế với chả má ." %>
+<% content_for :meta_description, "Tính xem Tết nhất thưởng xong còn đủ tiền lì xì cho tụi nhỏ ko? " %>
+<% content_for :meta_image, image_path("tax.png") %>
+<% content_for :keywords, title %>
+
+<section style="min-height: 600px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-8">
+        <h4 class="row p-title mt-30"><b>Nộp thuế là nghĩa vụ của công dân</b></h4>
+      </div>
+    </div>
+
+    <div class="form-row" >
+      <div class="col-md-8 mb-6">
+        <p>*Đơn vị là 1000đ (vd: 1 củ nhập <b style="color: red;">1000</b>) OK?? <p>
+        <input type="text" class="form-control" id="quantity" placeholder="Nhập số tiền chịu thuế">
+        <div class="" id="comment"></div>
+      </div>
+    </div>
+
+    <table class="col-lg-6 table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Số bị trừ</th>
+          <th scope="col">Còn lại</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Số tiền </th>
+          <td class="text-primary" id="toang"></td>
+          <td class="text-primary" id="thucNhan"></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <h4 class="row">Được tính theo bảng thuế của nhà nước</h4>
+
+    <table class="col-lg-6 table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Bậc</th>
+          <th scope="col">Tiền thưởng (tr đồng)</th>
+          <th scope="col">Thuế suất (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @data.each do |data| %>
+          <tr>
+            <th scope="row"><%= data[:lv] %></th>
+            <td class="text-primary" id="old-<%= data[:explan] %>"><%= data[:explan] %></td>
+            <td class="text-danger" id="per-<%= data[:lv].to_i - 1 %>"><%= data[:per] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+
+    $('#quantity').change(function(){
+      $('#toang, #thucNhan, #comment').hide();
+      $('#quantity').removeClass("is-invalid is-valid");
+      $('#comment').removeClass("valid-feedback invalid-feedback");
+      var value = $('#quantity').val();
+      var sodien = Number(value);
+
+      if (isNaN(sodien)){
+        $('#quantity').addClass("is-invalid");
+        $('#comment').addClass("invalid-feedback").text("Đã bảo hút cần ít thôi , nhập số thôi, nhập ký tự khác vào tính đc cc ấy !").fadeIn("slow");
+      }else {
+        var object = calculate(sodien);
+        var remain = sodien - object.money;
+
+        $('#thucNhan').text(object.money.toLocaleString()).fadeIn("slow");
+        $('#toang').text(remain.toLocaleString()).fadeIn("slow");
+        $('#comment').addClass("valid-feedback").text(object.comment).fadeIn("slow");
+        $('#quantity').addClass("is-valid");
+
+      }
+    })
+
+    function calculate(sodien) {
+      var lv = [5000, 10000, 18000, 32000, 52000, 80000]
+      var mnAfter = []
+      lv.forEach(function(item, index){
+        if (index == 0) {
+          mn = cal_per(item, index);
+          mnAfter.push(mn);
+        } else {
+          mn = cal_per(item - lv[index - 1], index) + mnAfter[index - 1];
+          mnAfter.push(mn);
+        }
+      })
+
+      if (sodien <= lv[0]) {
+        var obj = {
+          money: cal_per(sodien, 0),
+          comment: "Lương hơi cùi mía, cố gắng lên"
+        }
+        return obj;
+      } else if(sodien <= lv[1]) {
+        var obj = {
+          money: cal_per(sodien - lv[0], 1) + mnAfter[0],
+          comment: "Nhớ đi làm từ thiện thường xuyên nhé !"
+        }
+        return obj;
+      } else if(sodien <= lv[2]){
+        var obj = {
+          money: cal_per(sodien - lv[1], 2) + mnAfter[1],
+          comment: "Lương khá đấy !!"
+        }
+        return obj;
+      } else if(sodien <= lv[3]){
+        var obj = {
+          money: cal_per(sodien - lv[2], 3) + mnAfter[2],
+          comment: "Tiền nhiều để làm gì,  làm từ thiện bớt đi"
+        }
+        return obj;
+      } else if(sodien <= lv[4]){
+        var obj = {
+          money: cal_per(sodien - lv[3], 4) + mnAfter[3],
+          comment: "Bị trừ thuế nhiều vậy có xót ko?"
+        }
+        return obj;
+      } else if(sodien <= lv[5]){
+        var obj = {
+          money: cal_per(sodien - lv[4], 5) + mnAfter[4],
+          comment: "Tiền nhiều thế ! Cho e xin tý"
+        }
+        return obj;
+
+      } else {
+        var obj = {
+          money: cal_per(sodien - lv[5], 6) + mnAfter[5],
+          comment: "Tầm này làm vì đam mê chứ ham hố gì nữa!"
+        }
+        return obj;
+      }
+    }
+
+    function cal_per(total, per) {
+      var perId = $('#per-' + per).text();
+      var p = parseInt(perId) * 0.01;
+      return total - (total * p);
+    }
+
+    console.log(calculate(1000))
+  })
+</script>

@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get '/test' , to: 'posts#tests'
   get '/god_post', to: 'posts#god_post' , as: 'god_post'
   get '/evn', to: 'tools#new', as: 'env'
+  get '/tax', to: 'tools#tax', as: 'tax'
 
 end
